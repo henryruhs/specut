@@ -5,7 +5,7 @@ import glob from 'glob';
 import { program } from 'commander';
 import { Helper } from './helper.class.js';
 import { Option } from './option.class.js';
-import { Metadata, Data, Chunk } from './core.interface.js';
+import { Metadata, File, Data, Chunk } from './core.interface.js';
 import { Options } from './option.interface';
 
 export class Core
@@ -103,22 +103,22 @@ export class Core
 				if (mode === 'it')
 				{
 					currentIndex = currentIndex + file.sizes.it;
-					return { file, chunkIndex: this.getChunkIndex(currentIndex, data) };
+					return { file, chunkIndex: this.calcChunkIndex(currentIndex, data) };
 				}
 				else if (mode === 'describe')
 				{
 					currentIndex = currentIndex + file.sizes.describe;
-					return { file, chunkIndex: this.getChunkIndex(currentIndex, data) };
+					return { file, chunkIndex: this.calcChunkIndex(currentIndex, data) };
 				}
-				return { file, chunkIndex: this.getChunkIndex(index, data) };
+				return { file, chunkIndex: this.calcChunkIndex(index, data) };
 			})
-			.map(({ file, chunkIndex }) =>
+			.map(({ file, chunkIndex } : { file : File, chunkIndex : number }) =>
 			{
-				return { filePath: file.filePath, chunkPath: this.getChunkPath(file.filePath, chunkIndex) };
+				return { filePath: file.filePath, chunkPath: this.buildChunkPath(file.filePath, chunkIndex) };
 			});
 	}
 
-	protected getChunkPath(filePath : string, chunkIndex : number) : string
+	protected buildChunkPath(filePath : string, chunkIndex : number) : string
 	{
 		const { chunkPrefix, chunkSuffix, path } : Options = this.option.getAll();
 
@@ -129,7 +129,7 @@ export class Core
 		);
 	}
 
-	protected getChunkIndex(currentIndex : number, data : Data) : number
+	protected calcChunkIndex(currentIndex : number, data : Data) : number
 	{
 		const { amount } : Options = this.option.getAll();
 		const chunkIndex : number = Math.floor(currentIndex / this.perChunk(data));
