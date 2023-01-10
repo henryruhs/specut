@@ -2,7 +2,7 @@
 	"config": ".specut",
 	"amount": 5,
 	"mode": "file",
-	"specPattern": "**/**.spec.{js,jsx,ts,tsx}",
+	"specPattern": "**/*.spec.{js,jsx,ts,tsx}",
 	"ignorePattern": "**/node_modules",
 	"chunkPrefix": "__",
 	"chunkSuffix": "__",
