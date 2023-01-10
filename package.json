@@ -1,7 +1,7 @@
 {
 	"name": "specut",
 	"description": "Cut massive test suites into equal chunks",
-	"version": "1.0.0-beta.1",
+	"version": "1.0.0-beta.2",
 	"license": "MIT",
 	"type": "module",
 	"keywords":
@@ -25,7 +25,8 @@
 	},
 	"dependencies":
 	{
-		"commander": "9.4.1"
+		"commander": "9.4.1",
+		"glob": "8.0.3"
 	},
 	"devDependencies":
 	{
