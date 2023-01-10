@@ -26,7 +26,7 @@
 	"dependencies":
 	{
 		"commander": "9.4.1",
-		"glob": "8.0.3"
+		"fast-glob": "3.2.12"
 	},
 	"devDependencies":
 	{

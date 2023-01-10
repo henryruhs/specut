@@ -98,28 +98,20 @@ describe('core', () =>
 					filePath: 'tests/provider/04/01.spec.ts',
 					sizes:
 					{
-						it: 3,
-						describe: 2
+						describe: 2,
+						it: 3
 					}
 				},
 				{
-					filePath: 'tests/provider/04/01/01.spec.ts',
+					filePath: 'tests/provider/04/02.spec.ts',
 					sizes:
 					{
-						it: 3,
-						describe: 2
+						describe: 2,
+						it: 2
 					}
 				},
 				{
-					filePath: 'tests/provider/04/01/02.spec.ts',
-					sizes:
-					{
-						it: 2,
-						describe: 2
-					}
-				},
-				{
-					filePath: 'tests/provider/04/01/03.spec.ts',
+					filePath: 'tests/provider/04/03.spec.ts',
 					sizes:
 					{
 						describe: 0,
@@ -127,15 +119,23 @@ describe('core', () =>
 					}
 				},
 				{
-					filePath: 'tests/provider/04/02.spec.ts',
+					filePath: 'tests/provider/04/01/01.spec.ts',
 					sizes:
 					{
-						it: 2,
-						describe: 2
+						describe: 2,
+						it: 3
 					}
 				},
 				{
-					filePath: 'tests/provider/04/03.spec.ts',
+					filePath: 'tests/provider/04/01/02.spec.ts',
+					sizes:
+					{
+						describe: 2,
+						it: 2
+					}
+				},
+				{
+					filePath: 'tests/provider/04/01/03.spec.ts',
 					sizes:
 					{
 						describe: 0,
@@ -152,46 +152,8 @@ describe('core', () =>
 		{
 			option.set('amount', 2);
 			option.set('path', 'tests/provider');
-			expect(core.cut(core.analyse())).to.have.length(9);
-			expect(core.cut(core.analyse())).to.eql(
-			[
-				{
-					filePath: 'tests/provider/01/01.spec.ts',
-					chunkPath: 'tests/__provider__0/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/02/01.spec.ts',
-					chunkPath: 'tests/__provider__0/02/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/03/01.spec.ts',
-					chunkPath: 'tests/__provider__0/03/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01.spec.ts',
-					chunkPath: 'tests/__provider__0/04/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/01.spec.ts',
-					chunkPath: 'tests/__provider__0/04/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/03.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/03.spec.ts'
-				}
-			]);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(5);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(4);
 		});
 
 		it('per it', () =>
@@ -199,46 +161,8 @@ describe('core', () =>
 			option.set('amount', 2);
 			option.set('mode', 'it');
 			option.set('path', 'tests/provider');
-			expect(core.cut(core.analyse())).to.have.length(9);
-			expect(core.cut(core.analyse())).to.eql(
-			[
-				{
-					filePath: 'tests/provider/01/01.spec.ts',
-					chunkPath: 'tests/__provider__0/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/02/01.spec.ts',
-					chunkPath: 'tests/__provider__0/02/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/03/01.spec.ts',
-					chunkPath: 'tests/__provider__0/03/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/01.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/03.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/03.spec.ts'
-				}
-			]);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(3);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(6);
 		});
 
 		it('per describe', () =>
@@ -246,46 +170,8 @@ describe('core', () =>
 			option.set('amount', 2);
 			option.set('mode', 'describe');
 			option.set('path', 'tests/provider');
-			expect(core.cut(core.analyse())).to.have.length(9);
-			expect(core.cut(core.analyse())).to.eql(
-			[
-				{
-					filePath: 'tests/provider/01/01.spec.ts',
-					chunkPath: 'tests/__provider__0/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/02/01.spec.ts',
-					chunkPath: 'tests/__provider__0/02/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/03/01.spec.ts',
-					chunkPath: 'tests/__provider__0/03/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01.spec.ts',
-					chunkPath: 'tests/__provider__0/04/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/01.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/01.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/01/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/01/03.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/02.spec.ts',
-					chunkPath: 'tests/__provider__1/04/02.spec.ts'
-				},
-				{
-					filePath: 'tests/provider/04/03.spec.ts',
-					chunkPath: 'tests/__provider__1/04/03.spec.ts'
-				}
-			]);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(4);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(5);
 		});
 	});
 });

@@ -1,7 +1,7 @@
 import { EOL } from 'os';
 import fs from 'fs';
 import PATH, { dirname, basename } from 'path';
-import glob from 'glob';
+import fg from 'fast-glob';
 import { program } from 'commander';
 import { Helper } from './helper.class.js';
 import { Option } from './option.class.js';
@@ -62,7 +62,7 @@ export class Core
 			}
 		};
 
-		glob.sync(PATH.join(path, specPattern)).map(filePath =>
+		fg.sync(PATH.join(path, specPattern)).map(filePath =>
 		{
 			const fileContent : string = fs.readFileSync(filePath, 'utf8');
 
