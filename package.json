@@ -1,11 +1,12 @@
 {
 	"name": "specut",
 	"description": "Cut massive test suites into equal chunks",
-	"version": "1.0.0-beta.2",
+	"version": "1.0.0",
 	"license": "MIT",
 	"type": "module",
 	"keywords":
 	[
+		"cut",
 		"spec",
 		"chunk"
 	],
