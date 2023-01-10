@@ -1,4 +1,4 @@
-import os from 'os';
+import { EOL } from 'os';
 import fs from 'fs';
 import PATH, { dirname, basename } from 'path';
 import glob from 'glob';
@@ -10,7 +10,8 @@ import { Options } from './option.interface';
 
 export class Core
 {
-	metadataObject : Metadata = this.helper.readJsonFromAbsolutePath('./assets/metadata.json') as Metadata;
+	protected metadataObject : Metadata = this.helper.readJsonFromAbsolutePath('./assets/metadata.json') as Metadata;
+	protected stream : NodeJS.WriteStream = process.stdout;
 
 	constructor(
 		protected helper : Helper,
@@ -21,11 +22,10 @@ export class Core
 
 	init() : void
 	{
-		this.cut(this.analyse()).map(chunk => fs.cp(chunk.filePath, chunk.chunkPath,
-		{
-			recursive: true
-		}, () => process.stdout.write('.')));
-		process.stdout.write(os.EOL);
+		this.cut(this.analyse())
+			.map(chunk => fs.cpSync(chunk.filePath, chunk.chunkPath))
+			.map(() => this.stream.write('.'));
+		this.stream.write(EOL);
 	}
 
 	cli(process : NodeJS.Process) : void
@@ -50,7 +50,7 @@ export class Core
 
 	analyse() : Data
 	{
-		const { path, specPattern } : Options = this.option.getAll();
+		const { specPattern, path } : Options = this.option.getAll();
 		const data : Data =
 		{
 			files: [],
