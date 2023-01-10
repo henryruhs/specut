@@ -25,7 +25,7 @@ Usage
 Run the command:
 
 ```
-specut <path> <amount> [options]
+specut [options]
 
 -V, --version
 -C, --config <config>
