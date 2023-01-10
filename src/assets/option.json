@@ -1,0 +1,9 @@
+{
+	"config": ".specut",
+	"amount": 5,
+	"mode": "file",
+	"specPattern": "**/**.spec.{js,jsx,ts,tsx}",
+	"chunkPrefix": "__",
+	"chunkSuffix": "__",
+	"path": "."
+}
