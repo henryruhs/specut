@@ -1,7 +1,7 @@
 import { EOL } from 'os';
 import fs from 'fs';
+import glob from 'fast-glob';
 import PATH, { dirname, basename } from 'path';
-import fg from 'fast-glob';
 import { program } from 'commander';
 import { Helper } from './helper.class.js';
 import { Option } from './option.class.js';
@@ -50,7 +50,7 @@ export class Core
 
 	analyse() : Data
 	{
-		const { specPattern, path } : Options = this.option.getAll();
+		const { specPattern, ignorePattern, path } : Options = this.option.getAll();
 		const data : Data =
 		{
 			files: [],
@@ -62,7 +62,7 @@ export class Core
 			}
 		};
 
-		fg.sync(PATH.join(path, specPattern)).map(filePath =>
+		glob.sync(PATH.join(path, specPattern), { ignore: [ ignorePattern ] }).map(filePath =>
 		{
 			const fileContent : string = fs.readFileSync(filePath, 'utf8');
 

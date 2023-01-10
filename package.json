@@ -1,7 +1,7 @@
 {
 	"name": "specut",
 	"description": "Cut massive test suites into equal chunks",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"license": "MIT",
 	"type": "module",
 	"keywords":
@@ -26,7 +26,7 @@
 	},
 	"dependencies":
 	{
-		"commander": "9.4.1",
+		"commander": "9.5.0",
 		"fast-glob": "3.2.12"
 	},
 	"devDependencies":
@@ -42,7 +42,7 @@
 		"rollup-plugin-add-shebang": "0.3.1",
 		"rollup-plugin-copy": "3.4.0",
 		"rollup-plugin-delete": "2.0.0",
-		"rollup-plugin-ts": "3.0.2",
+		"rollup-plugin-ts": "3.1.1",
 		"ts-node": "10.9.1",
 		"typescript": "4.9.4"
 	},

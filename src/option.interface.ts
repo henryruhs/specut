@@ -6,6 +6,7 @@ export interface Options
 	amount : number;
 	mode : Mode;
 	specPattern : string;
+	ignorePattern : string;
 	chunkPrefix : string,
 	chunkSuffix : string;
 	path : string;

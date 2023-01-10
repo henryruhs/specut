@@ -34,3 +34,9 @@ specut [options]
 -P, --path <path>
 -h, --help
 ```
+
+
+Documentation
+-------------
+
+Read the [documenation](https://henryruhs.gitbook.io/specut) for a deep dive.
