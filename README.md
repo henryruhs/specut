@@ -25,13 +25,12 @@ Usage
 Run the command:
 
 ```
-specut [options]
+specut [options] [path]
 
--V, --version
--C, --config <config>
--A, --amount <amount>
--M, --mode <mode>
--P, --path <path>
+-c, --config <config>
+-a, --amount <amount>
+-m, --mode <mode>
+-v, --version
 -h, --help
 ```
 
