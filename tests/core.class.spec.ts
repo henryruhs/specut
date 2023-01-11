@@ -23,8 +23,8 @@ describe('core', () =>
 			expect(core.analyse().sizes).to.eql(
 			{
 				file: 1,
-				it: 0,
-				describe: 0
+				describe: 0,
+				it: 0
 			});
 			expect(core.analyse().files).to.eql(
 			[
@@ -32,8 +32,8 @@ describe('core', () =>
 					filePath: 'tests/provider/01/01.spec.ts',
 					sizes:
 					{
-						it: 0,
-						describe: 0
+						describe: 0,
+						it: 0
 					}
 				}
 			]);
@@ -45,8 +45,8 @@ describe('core', () =>
 			expect(core.analyse().sizes).to.eql(
 			{
 				file: 1,
-				it: 2,
-				describe: 0
+				describe: 0,
+				it: 2
 			});
 			expect(core.analyse().files).to.eql(
 			[
@@ -54,8 +54,8 @@ describe('core', () =>
 					filePath: 'tests/provider/02/01.spec.ts',
 					sizes:
 					{
-						it: 2,
-						describe: 0
+						describe: 0,
+						it: 2
 					}
 				}
 			]);
@@ -67,8 +67,8 @@ describe('core', () =>
 			expect(core.analyse().sizes).to.eql(
 			{
 				file: 1,
-				it: 3,
-				describe: 2
+				describe: 2,
+				it: 3
 			});
 			expect(core.analyse().files).to.eql(
 			[
@@ -76,8 +76,8 @@ describe('core', () =>
 					filePath: 'tests/provider/03/01.spec.ts',
 					sizes:
 					{
-						it: 3,
-						describe: 2
+						describe: 2,
+						it: 3
 					}
 				}
 			]);
@@ -89,8 +89,8 @@ describe('core', () =>
 			expect(core.analyse().sizes).to.eql(
 			{
 				file: 6,
-				it: 10,
-				describe: 8
+				describe: 8,
+				it: 10
 			});
 			expect(core.analyse().files).to.eql(
 			[
@@ -156,15 +156,6 @@ describe('core', () =>
 			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(4);
 		});
 
-		it('per it', () =>
-		{
-			option.set('amount', 2);
-			option.set('mode', 'it');
-			option.set('path', 'tests/provider');
-			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(3);
-			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(6);
-		});
-
 		it('per describe', () =>
 		{
 			option.set('amount', 2);
@@ -172,6 +163,15 @@ describe('core', () =>
 			option.set('path', 'tests/provider');
 			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(4);
 			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(5);
+		});
+
+		it('per it', () =>
+		{
+			option.set('amount', 2);
+			option.set('mode', 'it');
+			option.set('path', 'tests/provider');
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__0'))).to.have.length(3);
+			expect(core.cut(core.analyse()).filter(chunk => chunk.chunkPath.startsWith('tests/__provider__1'))).to.have.length(6);
 		});
 	});
 });

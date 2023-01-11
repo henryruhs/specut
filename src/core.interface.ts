@@ -9,8 +9,8 @@ export interface File
 	filePath : string;
 	sizes :
 	{
-		it : number;
 		describe : number;
+		it : number;
 	};
 }
 
@@ -20,8 +20,8 @@ export interface Data
 	sizes :
 	{
 		file : number;
-		it : number;
 		describe : number;
+		it : number;
 	};
 }
 

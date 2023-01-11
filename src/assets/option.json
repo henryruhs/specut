@@ -6,8 +6,8 @@
 	"modeArray":
 	[
 		"file",
-		"it",
-		"describe"
+		"describe",
+		"it"
 	],
 	"specPattern": "**/*.spec.{js,jsx,ts,tsx}",
 	"ignorePattern": "**/node_modules",

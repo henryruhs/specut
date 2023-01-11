@@ -1,1 +1,1 @@
-export type Mode = 'file' | 'it' | 'describe';
+export type Mode = 'file' | 'describe' | 'it';

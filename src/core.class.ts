@@ -64,8 +64,8 @@ export class Core
 			sizes:
 			{
 				file: 0,
-				it: 0,
-				describe: 0
+				describe: 0,
+				it: 0
 			}
 		};
 
@@ -79,18 +79,18 @@ export class Core
 				filePath,
 				sizes:
 				{
-					it: (() =>
-					{
-						const size : number = fileContent.match(/it\(/g)?.length || 0;
-
-						data.sizes.it += size;
-						return size;
-					})(),
 					describe: (() =>
 					{
 						const size : number = fileContent.match(/describe\(/g)?.length || 0;
 
 						data.sizes.describe += size;
+						return size;
+					})(),
+					it: (() =>
+					{
+						const size : number = fileContent.match(/it\(/g)?.length || 0;
+
+						data.sizes.it += size;
 						return size;
 					})()
 				}
@@ -108,14 +108,14 @@ export class Core
 			.filter(value => modeArray.includes(mode) ? value : null)
 			.map((file, index) =>
 			{
+				if (mode === 'describe')
+				{
+					currentIndex = currentIndex + file.sizes.describe;
+					return { file, chunkIndex: this.calcChunkIndex(currentIndex, data) };
+				}
 				if (mode === 'it')
 				{
 					currentIndex = currentIndex + file.sizes.it;
-					return { file, chunkIndex: this.calcChunkIndex(currentIndex, data) };
-				}
-				else if (mode === 'describe')
-				{
-					currentIndex = currentIndex + file.sizes.describe;
 					return { file, chunkIndex: this.calcChunkIndex(currentIndex, data) };
 				}
 				return { file, chunkIndex: this.calcChunkIndex(index, data) };
@@ -149,13 +149,13 @@ export class Core
 	{
 		const { amount, mode } : Options = this.option.getAll();
 
-		if (mode === 'it')
-		{
-			return Math.ceil(data.sizes.it / amount);
-		}
 		if (mode === 'describe')
 		{
 			return Math.ceil(data.sizes.describe / amount);
+		}
+		if (mode === 'it')
+		{
+			return Math.ceil(data.sizes.it / amount);
 		}
 		return Math.ceil(data.sizes.file / amount);
 	}
