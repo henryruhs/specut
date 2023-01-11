@@ -5,6 +5,7 @@ export interface Options
 	config : string;
 	amount : number;
 	mode : Mode;
+	modeArray : Mode[];
 	specPattern : string;
 	ignorePattern : string;
 	chunkPrefix : string,

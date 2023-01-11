@@ -2,7 +2,7 @@ import { EOL } from 'os';
 import fs from 'fs';
 import glob from 'fast-glob';
 import PATH, { dirname, basename } from 'path';
-import { program } from 'commander';
+import { program, Option as CommanderOption } from 'commander';
 import { Helper } from './helper.class.js';
 import { Option } from './option.class.js';
 import { Metadata, File, Data, Chunk } from './core.interface.js';
@@ -22,30 +22,37 @@ export class Core
 
 	init() : void
 	{
-		this.cut(this.analyse())
-			.map(chunk => fs.cpSync(chunk.filePath, chunk.chunkPath))
-			.map(() => this.stream.write('.'));
-		this.stream.write(EOL);
+		const chunks : Chunk[] = this.cut(this.analyse());
+
+		chunks.map(chunk => fs.cpSync(chunk.filePath, chunk.chunkPath)).map(() => this.stream.write('.'));
+		if (chunks.length)
+		{
+			this.stream.write(EOL);
+		}
 	}
 
 	cli(process : NodeJS.Process) : void
 	{
-		program
-			.version(this.metadataObject.name + ' ' + this.metadataObject.version)
-			.option('-C, --config <config>')
-			.option('-A, --amount <amount>')
-			.option('-M, --mode <mode>')
-			.option('-P, --path <path>')
-			.parse(process.argv);
+		const { modeArray } : Options = this.option.getAll();
 
-		this.option.init(
-		{
-			config: program.getOptionValue('config'),
-			amount: program.getOptionValue('amount'),
-			mode: program.getOptionValue('mode'),
-			path: program.getOptionValue('path')
-		});
-		this.init();
+		program
+			.argument('[path]')
+			.option('-c, --config <config>')
+			.option('-a, --amount <amount>')
+			.addOption(new CommanderOption('-m, --mode <mode>').choices(modeArray))
+			.version(this.metadataObject.name + ' ' + this.metadataObject.version, '-v, --version')
+			.action(path =>
+			{
+				this.option.init(
+				{
+					path,
+					config: program.getOptionValue('config'),
+					amount: program.getOptionValue('amount'),
+					mode: program.getOptionValue('mode')
+				});
+				this.init();
+			})
+			.parse(process.argv);
 	}
 
 	analyse() : Data
@@ -94,10 +101,11 @@ export class Core
 
 	cut(data : Data) : Chunk[]
 	{
-		const { mode } : Options = this.option.getAll();
+		const { mode, modeArray } : Options = this.option.getAll();
 		let currentIndex : number = 0;
 
 		return data.files
+			.filter(value => modeArray.includes(mode) ? value : null)
 			.map((file, index) =>
 			{
 				if (mode === 'it')

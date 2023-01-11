@@ -12,17 +12,17 @@ describe('option', () =>
 
 	it('init', () =>
 	{
-		expect(option.get('config')).to.equal('.specut');
-		expect(option.get('amount')).to.equal(5);
 		expect(option.get('path')).to.equal('.');
+		expect(option.get('config')).to.equal('.specutrc');
+		expect(option.get('amount')).to.equal(5);
 		option.init(
 		{
-			config: 'tests/provider/.specut',
-			path: '..'
+			path: 'tests/provider',
+			config: 'tests/provider/.specutrc'
 		});
-		expect(option.get('config')).to.equal('tests/provider/.specut');
+		expect(option.get('path')).to.equal('tests/provider');
+		expect(option.get('config')).to.equal('tests/provider/.specutrc');
 		expect(option.get('amount')).to.equal(10);
-		expect(option.get('path')).to.equal('..');
 	});
 
 	it('get and set', () =>

@@ -1,10 +1,16 @@
 {
-	"config": ".specut",
+	"path": ".",
+	"config": ".specutrc",
 	"amount": 5,
 	"mode": "file",
+	"modeArray":
+	[
+		"file",
+		"it",
+		"describe"
+	],
 	"specPattern": "**/*.spec.{js,jsx,ts,tsx}",
 	"ignorePattern": "**/node_modules",
 	"chunkPrefix": "__",
-	"chunkSuffix": "__",
-	"path": "."
+	"chunkSuffix": "__"
 }
