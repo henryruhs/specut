@@ -11,8 +11,8 @@ describe('cli', () =>
 			expect(error).to.be.null;
 			expect(fs.readdirSync('tests/__provider__0')).to.be.eql([ '01', '02', '03', '04' ]);
 			expect(fs.readdirSync('tests/__provider__1')).to.be.eql([ '04' ]);
-			fs.rmSync('tests/__provider__0', { recursive: true });
-			fs.rmSync('tests/__provider__1', { recursive: true });
+			fs.rmSync('tests/__provider__0', { recursive: true, force: true });
+			fs.rmSync('tests/__provider__1', { recursive: true, force: true });
 			done();
 		});
 	});
