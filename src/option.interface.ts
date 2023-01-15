@@ -8,6 +8,8 @@ export interface Options
 	modeArray : Mode[];
 	specPattern : string;
 	ignorePattern : string;
+	describeMatch : string;
+	itMatch : string;
 	chunkPrefix : string,
 	chunkSuffix : string;
 	path : string;

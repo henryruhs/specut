@@ -57,7 +57,7 @@ export class Core
 
 	analyse() : Data
 	{
-		const { specPattern, ignorePattern, path } : Options = this.option.getAll();
+		const { path, specPattern, ignorePattern, describeMatch, itMatch } : Options = this.option.getAll();
 		const data : Data =
 		{
 			files: [],
@@ -81,14 +81,16 @@ export class Core
 				{
 					describe: (() =>
 					{
-						const size : number = fileContent.match(/describe\(/g)?.length || 0;
+						const match : RegExp = new RegExp(describeMatch, 'g');
+						const size : number = fileContent.match(match)?.length || 0;
 
 						data.sizes.describe += size;
 						return size;
 					})(),
 					it: (() =>
 					{
-						const size : number = fileContent.match(/it\(/g)?.length || 0;
+						const match : RegExp = new RegExp(itMatch, 'g');
+						const size : number = fileContent.match(match)?.length || 0;
 
 						data.sizes.it += size;
 						return size;
@@ -128,7 +130,7 @@ export class Core
 
 	protected buildChunkPath(filePath : string, chunkIndex : number) : string
 	{
-		const { chunkPrefix, chunkSuffix, path } : Options = this.option.getAll();
+		const { path, chunkPrefix, chunkSuffix } : Options = this.option.getAll();
 
 		return PATH.join(
 			dirname(path),

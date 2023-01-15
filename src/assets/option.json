@@ -11,6 +11,8 @@
 	],
 	"specPattern": "**/*.spec.{js,jsx,ts,tsx}",
 	"ignorePattern": "**/node_modules",
+	"describeMatch": "describe\\(",
+	"itMatch": "it\\(",
 	"chunkPrefix": "__",
 	"chunkSuffix": "__"
 }
