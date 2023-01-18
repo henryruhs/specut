@@ -1,11 +1,14 @@
 import { expect } from 'chai';
 
-it('01', () =>
+describe('01', () =>
 {
-	expect('it').to.equal('it');
-});
+	it('01', () =>
+	{
+		expect('it').to.equal('it');
+	});
 
-it('02', () =>
-{
-	expect('describe').to.equal('describe');
+	it('02', () =>
+	{
+		expect('describe').to.equal('describe');
+	});
 });

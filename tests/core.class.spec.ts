@@ -45,7 +45,7 @@ describe('core', () =>
 			expect(core.analyse().sizes).to.eql(
 			{
 				file: 1,
-				describe: 0,
+				describe: 1,
 				it: 2
 			});
 			expect(core.analyse().files).to.eql(
@@ -54,7 +54,7 @@ describe('core', () =>
 					filePath: 'tests/provider/02/01.spec.ts',
 					sizes:
 					{
-						describe: 0,
+						describe: 1,
 						it: 2
 					}
 				}
