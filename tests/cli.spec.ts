@@ -8,7 +8,6 @@ describe('cli', () =>
 	{
 		exec('node --loader ts-node/esm src/cli.ts tests/provider --amount=2', error =>
 		{
-			console.log(error);
 			expect(error).to.be.null;
 			expect(fs.readdirSync('tests/__provider__0')).to.be.eql([ '01', '02', '03', '04' ]);
 			expect(fs.readdirSync('tests/__provider__1')).to.be.eql([ '04' ]);
