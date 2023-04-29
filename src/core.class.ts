@@ -1,8 +1,10 @@
 import { EOL } from 'os';
 import fs from 'fs';
-import glob from 'fast-glob';
 import PATH, { dirname, basename } from 'path';
+
+import glob from 'fast-glob';
 import { program, Option as CommanderOption } from 'commander';
+
 import { Helper } from './helper.class.js';
 import { Option } from './option.class.js';
 import { Metadata, File, Data, Chunk } from './core.interface.js';

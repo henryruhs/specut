@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+
 import { Core, Option, Helper } from '../src';
 
 describe('core', () =>
