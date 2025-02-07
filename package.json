@@ -1,7 +1,7 @@
 {
 	"name": "specut",
 	"description": "Cut massive test suites into equal chunks",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"license": "MIT",
 	"type": "module",
 	"keywords":
@@ -30,30 +30,30 @@
 	},
 	"dependencies":
 	{
-		"commander": "11.1.0",
-		"fast-glob": "3.3.2"
+		"commander": "13.1.0",
+		"fast-glob": "3.3.3"
 	},
 	"devDependencies":
 	{
-		"@isnotdefined/eslint-config": "9.8.0",
-		"@types/chai": "4.3.11",
-		"@types/mocha": "10.0.6",
-		"@types/node": "20.11.7",
-		"chai": "5.0.3",
-		"eslint": "8.56.0",
-		"mocha": "10.2.0",
-		"rollup": "4.9.6",
+		"@isnotdefined/eslint-config": "10.0.0",
+		"@types/chai": "5.0.1",
+		"@types/mocha": "10.0.10",
+		"@types/node": "22.13.1",
+		"chai": "5.1.2",
+		"eslint": "9.19.0",
+		"mocha": "11.1.0",
+		"rollup": "4.34.5",
 		"rollup-plugin-add-shebang": "0.3.1",
 		"rollup-plugin-copy": "3.5.0",
-		"rollup-plugin-delete": "2.0.0",
+		"rollup-plugin-delete": "2.1.0",
 		"rollup-plugin-ts": "3.4.5",
 		"ts-node": "10.9.2",
-		"typescript": "5.3.3"
+		"typescript": "5.7.3"
 	},
 	"scripts":
 	{
-		"build": "rollup --config=rollup.config.js",
-		"lint": "eslint src tests --ext=.ts",
+		"build": "rollup --config rollup.config.js",
+		"lint": "eslint .",
 		"fix": "npm run lint -- --fix",
 		"test": "mocha"
 	},
