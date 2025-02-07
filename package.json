@@ -1,7 +1,7 @@
 {
 	"name": "specut",
 	"description": "Cut massive test suites into equal chunks",
-	"version": "2.4.1",
+	"version": "2.4.2",
 	"license": "MIT",
 	"type": "module",
 	"keywords":
